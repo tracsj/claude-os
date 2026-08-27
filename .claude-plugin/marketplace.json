@@ -1,0 +1,16 @@
+{
+  "name": "tracsj",
+  "description": "Stephen Tracy's Claude Code plugins.",
+  "owner": {
+    "name": "Stephen Tracy",
+    "url": "https://stephentracy-site.vercel.app/"
+  },
+  "plugins": [
+    {
+      "name": "claude-os",
+      "source": "./plugins/claude-os",
+      "description": "Skills for building and maintaining a Claude Code setup: project scaffolding, skill and agent authoring, data-model shaping, and an app-craft audit.",
+      "category": "Productivity"
+    }
+  ]
+}
