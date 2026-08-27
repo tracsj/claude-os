@@ -21,7 +21,7 @@ That is what this is. A living layer of functionality, sitting above eleven proj
 
 ## What has held up
 
-The setup skills get used every time I start something new, which is the honest test of whether a convention is real or merely written down. `claude-setup` has scaffolded every project I have started in the past year.
+I use this system extensively whenever I create a new repository, which is the honest test of whether a convention is real or merely written down. A practice that only survives while you are thinking about it is not a practice.
 
 The part I did not expect to matter as much as it does is the learning loop. Every skill opens by reading its own `learnings.md` and closes by asking whether anything belongs there, and entries are promoted into the skill itself and then deleted rather than left to pile up. Two skills sit on top of that loop and are the reason it does not silt up: one that cleans house internally — consolidating learnings across skills, pruning stale entries, checking the memory layer is still coherent — and one that looks outward at what has changed in the ecosystem and asks what is worth adopting. Cleaning and upgrading turn out to be different jobs, and a system that only does the first slowly falls behind while a system that only does the second accumulates everything it ever tried.
 
@@ -33,7 +33,7 @@ The thing that took longest to accept is that writing it down is not always enou
 
 There is a rule in one of my repositories saying that file edits go through the editing tool rather than through a shell script, because a bad regex fails silently where the editing tool fails loudly. I wrote it, then wrote it more emphatically, and it kept getting broken — not occasionally, but in about a quarter of all file changes in that project. The instruction had been loaded into context on every single one of those occasions. More emphasis was never going to fix it.
 
-What fixed it was a hook: twenty lines that inspect the command before it runs and refuse the ones that write to a source file. It has not been broken since, because it cannot be.
+What fixed it was a hook — fifty lines of code that inspect the command before it runs and refuse the ones that write to a source file. It has not been broken since, because it cannot be. The file is twice that length, because the explanation of why it exists is longer than the code that enforces it.
 
 That is the distinction the rest of this README is organized around, and it is the one I would want a team to understand before anything else. Instructions in `CLAUDE.md` are context — delivered to the model, shaping what it does, followed most of the time. Hooks and permission rules are enforcement, and they hold regardless of what the model decides. Most of the frustration people have with agent setups comes from having put something in the first category that belonged in the second. The tell is that you find yourself rewriting a rule in stronger and stronger language.
 

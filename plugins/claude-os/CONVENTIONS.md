@@ -21,6 +21,10 @@ If you install the plugin and want the skills to behave as designed, these are t
 
 The practical test: if a section is only read during one step, it belongs in a spoke.
 
+**One thing to know about spoke files in an installed plugin.** The skill body is delivered to the model automatically, but a spoke file has to be *read*, and an installed plugin lives outside your project — under `~/.claude/plugins/cache/…`. In an interactive session that produces a permission prompt the first time, which you approve and move on. In a headless run (`claude -p`) it fails silently unless you pass `--add-dir` pointing at the plugin, because file access is scoped to the working directory and a denied read looks exactly like a missing file.
+
+This applies to a skill reading its own spokes, not only to the cross-skill references in `build-skill` and `build-agent`. Worth knowing before you conclude a plugin is broken: measured here, the paths resolved correctly every time and only the directory scope was in the way.
+
 ## 2. Every skill opens by reading its learnings and closes by writing them
 
 The first line of every `SKILL.md`:
