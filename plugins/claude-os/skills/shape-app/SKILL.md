@@ -68,6 +68,20 @@ doc you'd clobber. A null-safe signature over a ritual-shaped prompt is a trap t
 green light. The cheap reuse is usually one layer down: the module that isn't coupled to the ritual,
 only *anchored* to one framing in its wording.
 
+**When Phase 0 finds the door already deferred, read the deferral's REASON before its scope.** A
+deferral records why something looked expensive *at the time*, and that reason is itself a claim
+that can expire. The cheap outcome is often a constraint you can decline to take on rather than a
+cost you have to absorb. Two shapes recur. A reason of the form *"this would make X a second source
+of truth"* describes a consequence of a design choice, not a property of X — deciding the app never
+claims to know X's current state can dissolve it. A reason of the form *"X is unreachable"* is a
+**factual claim about a tool surface, and it is the one to probe rather than re-read** — surfaces
+change, and the doc does not. **Probe it with a control**: a positive result alone can mean the
+filter was ignored, so pair it with a query you expect to come back empty and check that it does.
+*(Both shapes turned up in one afternoon on an email-triage app. One deferral dissolved once the app
+stopped claiming to know a calendar's current state; another called a mail folder unreachable, and
+a probe found it readable — but only the empty control proved the filter was real rather than a
+silent alias for a different folder.)*
+
 ### Phase 1 — Data model + invariants
 Start by pinning **the job** (who it's for, what they're trying to do) and **the appetite** (how
 much time it's worth) in one sentence each — they cap the scope. Then name the nouns and their
@@ -97,6 +111,17 @@ when you trace the job.
 Name the **one** feature to build end-to-end first (data → API → UI → the rendered thing you
 look at). It validates the architecture while a mistake costs one refactor, not twelve. Breadth
 comes after the slice holds up.
+
+**State the slice as a pair: the thing working, AND the thing failing when its one precondition is
+removed.** A happy-path slice that passes first time proves far less than it looks — it cannot
+distinguish "the mechanism works" from "nothing was ever going to break here." Build the broken
+version deliberately, watch it destroy what it should destroy, then fix it and re-run. That is also
+how you find out whether an existing guard covers the new failure, which is usually the cheapest
+place to put the fix. *(On one build, the slice "a deferred item survives being snoozed" passed
+immediately and proved nothing. Deliberately dropping the scope clause then destroyed a live item
+while the existing guard stayed silent, because one bad retirement in eight is not conspicuous
+enough to trip anything. The guard that came out of it was the actual deliverable, and the happy
+path would never have asked for it.)*
 
 ### Phase 4 — Deferral list
 Write down what you are choosing **not** to decide yet — the two-way doors left open on
@@ -147,6 +172,13 @@ is the real risk:
       already **override** that field (their instruction wins, so the description was never
       load-bearing for them) — then run them anyway if it's cheap; a lib function is usually
       side-effect-free and callable from a scratch script even when its route is not.
+- [ ] **A new control is REACHABLE, which is a separate question from whether it works.** Route
+      tests and unit tests both pass on a control no user can get to. Ask what state the app is in
+      when the control is needed, then navigate there the way a person would — the answer is often
+      that the surface hosting it has already gone. *(A date field for rescheduling was added to a
+      card and verified at the route level. Deciding an item settles it, the main view filters
+      settled items out, so the card vanished at the exact moment the control became relevant. Only
+      clicking through found it; it moved to the list view, the one surface left.)*
 - [ ] **A stochastic field that degrades QUIETLY is distribution-verified, not point-verified** —
       if a miss falls back to something that still looks intentional (a plausible "New" pill, a
       generic label), n=1 cannot see it. Sample the constrained end of the input range, not the

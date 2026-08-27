@@ -1,6 +1,6 @@
 {
   "name": "claude-os",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Skills for building and maintaining a Claude Code setup: scaffold a project's .claude/ folder, author skills and agents that hold up, shape an app's data model before you build it, and audit a running app for craft.",
   "author": {
     "name": "Stephen Tracy",
