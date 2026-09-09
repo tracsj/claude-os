@@ -105,4 +105,4 @@ Before calling the audit done:
 Append a dated entry under `## Staging` in `learnings.md` if anything notable happened (a check
 that misfired, a pattern that recurred, a project-specific constraint discovered). Apply promotion
 + pruning per `CONVENTIONS.md` §3 — promote what generalizes into the Gotchas above and
-delete the Staging entry; keep Staging a handful of live observations, not an archive.
+delete the Staging entry. Prune Staging on AGE, never on count — a full inbox is usually throughput; git history is the archive.

@@ -38,6 +38,8 @@ Write a subfolder `CLAUDE.md`. Rules:
 
 Show for approval before saving.
 
+**Call `advisor` on the draft before it is written.** It has caught mis-attributed lineage, provisional names treated as settled, and a CLAUDE.md asserting the session's conclusion before the test had run. A draft on disk gets inherited by the next session with a session's authority behind it; the call costs a minute and has bound three times.
+
 ---
 
 ## PHASE 3 — SKILLS (if needed)

@@ -107,6 +107,16 @@ user's job end-to-end as **places → things → connections** (boxes and arrows
 to surface **what the schema forgot** — a missing entity, field, or state that only shows up
 when you trace the job.
 
+**Then walk the real screens, because boxes and arrows miss the gaps that matter.** A box labelled
+"Profile" is compatible with any set of fields and a box labelled "Invitation" with any set of states;
+the gap appears only when you write **the actual sentence each screen says to the user** and name the
+field that makes it true. For each screen: which entity and field does it read from, and does any
+sentence it asserts have no field behind it? A "share" button with no audience field, a grid the model
+cannot derive, a promise that either person can stop with no state to record it — all found this way
+and none by the breadboard. *(Three occurrences on one consumer-app build across two days, the last
+finding four gaps on nine boards that had already been drawn.)* A percentage, bar, ring or level is the
+commonest form of an underivable assertion: it claims a cap, so ask what the cap is before drawing it.
+
 ### Phase 3 — Vertical slice
 Name the **one** feature to build end-to-end first (data → API → UI → the rendered thing you
 look at). It validates the architecture while a mistake costs one refactor, not twelve. Breadth
