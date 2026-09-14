@@ -27,6 +27,8 @@ Before we close this session:
    - Older than 30 days, unpromoted → delete
    Staging stays lean — a handful of active observations at most.
 
+   **Insert INSIDE the `## Staging` section — neither above the heading nor below a later one.** A learnings file may carry a second section (`## Archive`, `## Incident archive`), so a blind append lands the entry where nobody will read it; and anchoring an Edit on the file's H1 lands it ABOVE the heading, which is the same fault mirrored and is the one that actually happened — twice in one session, 2026-09-03, in two different repos' files. Either way the entry is swept by nothing. Gated by `python3 ~/.claude/bin/learnings-placement.py`, which walks every learnings file in every repo.
+
 4. **Files** — Flag any file over 150 lines and suggest how to split it.
 
 5. **Stale working-doc scan** — Run `find . -maxdepth 1 -name "*.md" | sort`. Known-persistent (skip): `CLAUDE.md`, `README.md`, `CHANGELOG.md`, `CONTRIBUTING.md`, `LICENSE.md`. For each file not on that list, ask the user: delete, move to the right subfolder, or keep with an explicit note added to CLAUDE.md. Do not silently skip or auto-delete.
@@ -44,6 +46,14 @@ Before we close this session:
 9. **Memory health** — Periodically (every 5–10 sessions), run whatever cross-skill audit you keep: consolidate learnings across skills, prune stale Staging entries, check memory integrity. Skip if the last run was recent. (This plugin does not ship an audit skill — see `CONVENTIONS.md`, *What this plugin does not ship*. Drop this step if you have not built one.)
 
 10. **Commit wrap-up changes** — Stage and commit any changes made during wrap-up (learnings, CLAUDE.md, memory files). Run `git status` in the project repo to confirm it is clean. If you also keep `~/.claude/` under version control, run it there too — a session that edits a user-scope skill or CLAUDE.md has touched a second repository, and a clean project repo says nothing about that one.
+
+   - **Commit by explicit path.** `git commit <path1> <path2> -m "…"`. Concurrent sessions share the working tree. (`git add -A` / `-u` / `.` and `git commit -a` are blocked by `~/.claude/hooks/git-tenancy-guard.py`, which parses the command — Bash deny rules are a literal prefix match and any flag moved out of first position evades them. A sibling hook, `permission-rule-guard.py`, blocks a write that introduces a banned allow rule into a settings file. Both are user-scope, so a new project needs no per-repo config.)
+   - **`git status --short` before and after.** Before, to confirm every file is yours; after, to catch what path-scoping left behind.
+   - **`git diff <path>` before committing.** Path-scoping stops you staging other files; it does not stop you shipping another session's hunks in a file you both touched.
+   - **Check every repo you touched**, including `~/.claude/`. The cwd repo is not reliably the work repo.
+   - **Chain with `&&`** — a failed `git add` does not stop a following `git commit`, and you get a commit whose message describes more than its tree contains.
+   - **Never heredoc a commit body.** Use `-m "title" -m "body"`, or `git commit -F <file>`. `--` goes after all `-m` flags.
+   - **Verify the branch** with `git branch --show-current`. Concurrent sessions move HEAD.
 
 ## Verification
 
