@@ -21,6 +21,7 @@ Ask:
 - Does it need a different tone or set of never-rules from the root project?
 - Will there be recurring structured work that needs a skill?
 - Would a tracker or progress file be useful here? If yes, we'll create it as part of setup and reference it from CLAUDE.md.
+- Will this folder hold several unrelated sub-projects, each with its own background? If yes, the folder-level CLAUDE.md can only carry shared instructions — establish a `context.md` per child folder during setup rather than pushing per-project context into CLAUDE.md. A single continuous project needs no such split.
 
 **If this area is an app or a feature that adds data** (entities, relationships, a source of truth), consider running `/shape-app` first — it shapes the model + invariants before code.
 
