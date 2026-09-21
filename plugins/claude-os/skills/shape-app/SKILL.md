@@ -156,6 +156,13 @@ purpose. This is what stops over-designing; most docs record only decisions and 
    or changes an entity, relationship, or source of truth, run `/shape-app` (three bullets is
    enough)."* This is what makes the skill re-summon itself at feature N.
 4. If the project has no `.claude/` folder yet, point to **`claude-setup`** to scaffold it.
+5. **Before committing any delta that adds a relationship or a second store, put the finished `SHAPING.md` to the advisor with
+   the single question "which of these doors would you refuse to walk through", and expect the refusals at the SEAMS between
+   entities, never inside one.** Three occurrences on one consumer-app build across eleven days: an invitation referencing
+   an item by id beside a version-pinned completion record; a contact whose base text still said "only by introduction"
+   beside a newly added door; a session field whose name matched one of the values of a neighbouring field, plus an action
+   done inside a session being asked to reflect twice. Every one passed the entity walk and the vocabulary grep, because
+   each was consistent with its own table. A name that is accidentally true of a neighbour's member is the commonest shape.
 
 ---
 
