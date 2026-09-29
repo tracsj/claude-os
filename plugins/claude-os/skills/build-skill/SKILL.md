@@ -29,6 +29,7 @@ Ask for each skill:
 - **Skills that read spoke files (context/, design-system.md, etc.) must also ask whether those files need updating at close.** Consumption without maintenance creates silent drift. Add a mandatory check: "Did anything this session make [spoke file] stale? If yes, update it now."
 - **Decide global vs project scope before writing a line.** Ask: does this apply to every project, or to one? If the skill references specific file paths, CSS tokens, a palette, a schema, or a single codebase, it is project-scoped and belongs in that repo's `.claude/skills/` — not `~/.claude/skills/`. The pull toward global is strong because the skill *feels* reusable while you are writing it; the content is the evidence, not the feeling. The failure that produced this rule: a UX skill written at global scope whose every substantive line named one project's tokens, paths and palette. It read as reusable and was not.
 - **Folder-scoped skills register in the folder's CLAUDE.md, not root.** If the skill operates primarily within one subfolder of a project (e.g. `website-ux` for `website/`, `create-blog-post` for blog work), reference it in *that folder's* CLAUDE.md or via the folder's own `.claude/`, not at the project root. Root-level skill mentions are reserved for skills that apply across every folder of the project — in practice that is usually just `wrap-up`. Genuinely cross-folder skills are rare, so if you are about to register one at root, check first that it isn't really scoped to a single folder's workflow.
+- **When a skill is derived from a named artifact, re-read that artifact from disk at authoring time and say so in the spoke file**, so the next session knows the derivation has a timestamp. Then **run the skill's own verification against its exemplar** — if the canonical example fails the check, one of the two is wrong. A read taken early in a long session may be of a superseded draft; one skill's register rule was written from such a draft and was flatly wrong. The re-read pays a second way too: you read the neighbouring lines, not only the one you came for.
 
 ## File structure to create
 
@@ -54,6 +55,7 @@ Before presenting the finished skill, check:
 - [ ] Verification step is present
 - [ ] Targets under 200 lines; if longer, the overflow is genuinely hub material
 - [ ] If skill reads a spoke file: Final step asks whether that file needs updating
+- [ ] If the skill is being EXTENDED, not built: re-read its `description` and ask whether the NOT-list now names something it does. A description is routing, not documentation, so a stale negative trigger silently suppresses the new capability
 
 ## Final step — Capture learnings
 

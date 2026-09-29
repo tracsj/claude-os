@@ -18,7 +18,9 @@
       "Bash(git fetch:*)",
       "Bash(git pull:*)",
       "Bash(git stash:*)",
-      "Bash(npm run:*)"
+      "Bash(npm run dev:*)",
+      "Bash(npm run build:*)",
+      "Bash(npm run test:*)"
     ],
     "deny": [
       "Bash(git push --force:*)",
@@ -61,8 +63,10 @@ Narrowing the path does not help either — `Bash(git -C /Users/me/* status*)` s
 `node:*` is unrestricted code execution — a script run this way can read
 `.env.local` (or anything else) and exfiltrate it, bypassing every `Read` deny
 rule above. It is on the blocklist in `CONVENTIONS.md` §7 for exactly
-this reason. For a JS/TS project, `Bash(npm run:*)` already covers running the
-project's own scripts; if a session needs a new capability, add the narrowest
-rule that grants it (a specific `npm run <script>`, a scoped CLI), never the
-open `node:*` wildcard. The same applies to `python3:*`, `uv run:*`,
-`npx:*`, `bunx:*`, and unscoped `curl:*`.
+this reason. For a JS/TS project, allow the named scripts in `package.json`
+(`Bash(npm run dev:*)`, `Bash(npm run build:*)`, …), never `Bash(npm run:*)`:
+the bare form is a package-manager runner like `npx` and `uv run`, and any
+script added later runs under it unreviewed. If a session needs a new
+capability, add the narrowest rule that grants it, never the open `node:*`
+wildcard. The same applies to `python3:*`, `uv run:*`, `npx:*`, `bunx:*`, and
+unscoped `curl:*`.
