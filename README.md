@@ -21,7 +21,7 @@ Some of the practice here started with Boris Cherny, who created Claude Code. He
 
 I wanted the next step from that. A layer that improves as I use it, so that a practice I work out in one repository travels to the next one without my having to remember it, re-derive it, or point a new project at an old one and ask it to work out what was good in there.
 
-I needed a living layer of functionality, sitting above eleven projects, that gets better because I keep working in it.
+I needed a living layer of functionality, sitting above more than a dozen projects, that gets better because I keep working in it.
 
 ## What has held up
 

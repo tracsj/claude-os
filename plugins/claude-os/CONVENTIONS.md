@@ -1,6 +1,6 @@
 # Conventions
 
-The six skills in this plugin assume a handful of shared conventions. They developed over about a year of running one Claude Code configuration across eleven projects, and each of them exists because something went wrong first.
+The six skills in this plugin assume a handful of shared conventions. They developed over about a year of running one Claude Code configuration across more than a dozen projects, and each of them exists because something went wrong first.
 
 If you install the plugin and want the skills to behave as designed, these are the assumptions they make. If you'd rather run your own conventions, the skills still work — you'll want to adjust the closing section of each `SKILL.md`, which is where most of this is referenced.
 
